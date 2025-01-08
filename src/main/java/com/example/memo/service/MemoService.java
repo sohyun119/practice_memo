@@ -4,23 +4,23 @@ import com.example.memo.dto.MemoRequestDto;
 import com.example.memo.dto.MemoResponseDto;
 import com.example.memo.entity.Memo;
 import com.example.memo.repository.MemoRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+import org.apache.catalina.core.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
+@Service
 public class MemoService {
     private final MemoRepository memoRepository;
 
-    public MemoService(JdbcTemplate jdbcTemplate) {
-        this.memoRepository = new MemoRepository(jdbcTemplate);
+   // @Autowired 가 생성자1개일때는 생략가능할 수 있게 되었다.
+    public MemoService(MemoRepository memoRepository) {
+        this.memoRepository = memoRepository;
     }
+
 
     public MemoResponseDto createMemo(MemoRequestDto requestDto) {
 
